@@ -4,9 +4,11 @@ class Basket {
 
 	int selectedItems
 	Float totalPrice
+	Book book
 	
-	static hasMany = [selectedProducts: SelectedProducts]
+	static hasMany = [book: Book]
 	static belongsTo = [user: User]
+	
 	
     static constraints = {
     }

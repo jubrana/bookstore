@@ -9,10 +9,26 @@ class BasketController {
     def index() {
         redirect(action: "list", params: params)
     }
+	
+	def proba(Long id) {
+		
+		def book = Book.get(id)
+		
+		println book.title
+		
+		def basketInst = new Basket(selectedItems: 2, totalPrice: 22.3, book: book,
+			user: User.findByUsername(sec.loggedInUserInfo(field:'username')))
+		
+		println Basket.findAllByUser(User.findByUsername(sec.loggedInUserInfo(field:'username')))
+		
+		println basketInst.save(flush: true, failOnError: true)
+		
+		redirect(action: "list")
+	}
 
     def list(Integer max) {
         params.max = Math.min(max ?: 10, 100)
-        [basketInstanceList: Basket.list(params), basketInstanceTotal: Basket.count()]
+        [basketInstanceList: Basket.findAllByUser(User.findByUsername(sec.loggedInUserInfo(field:'username'))), basketInstanceTotal: Basket.findAllByUser(User.findByUsername(sec.loggedInUserInfo(field:'username'))).size()]
     }
 
     def create() {

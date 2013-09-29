@@ -9,6 +9,23 @@ class BooksPurchasedController {
     def index() {
         redirect(action: "list", params: params)
     }
+	
+	def purchaseBooks() {
+		
+		def basketList = Basket.findAllByUser(User.findByUsername(sec.loggedInUserInfo(field:'username')))
+		
+		def purchasedB
+		
+		for(b in basketList) {
+			
+			purchasedB = new BooksPurchased(user: User.findByUsername(sec.loggedInUserInfo(field:'username')), books: Book.get(b.book.id))
+			purchasedB.save(flush: true)
+			Basket.get(b.id).delete(flush: true)
+		}
+		
+		
+		redirect(action: "list")
+	}
 
     def list(Integer max) {
         params.max = Math.min(max ?: 10, 100)

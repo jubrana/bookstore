@@ -32,17 +32,6 @@
 				</li>
 				</g:if>
 			
-				<g:if test="${basketInstance?.selectedProducts}">
-				<li class="fieldcontain">
-					<span id="selectedProducts-label" class="property-label"><g:message code="basket.selectedProducts.label" default="Selected Products" /></span>
-					
-						<g:each in="${basketInstance.selectedProducts}" var="s">
-						<span class="property-value" aria-labelledby="selectedProducts-label"><g:link controller="selectedProducts" action="show" id="${s.id}">${s?.encodeAsHTML()}</g:link></span>
-						</g:each>
-					
-				</li>
-				</g:if>
-			
 				<g:if test="${basketInstance?.totalPrice}">
 				<li class="fieldcontain">
 					<span id="totalPrice-label" class="property-label"><g:message code="basket.totalPrice.label" default="Total Price" /></span>

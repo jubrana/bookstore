@@ -20,6 +20,11 @@ class User {
 	
 	static hasMany = [booksPurchased: BooksPurchased]
 	
+	String toString() {
+		
+		return username
+	}
+	
 	static constraints = {
 		username blank: false, unique: true
 		password blank: false

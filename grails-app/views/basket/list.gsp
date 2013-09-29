@@ -24,11 +24,11 @@
 				<thead>
 					<tr>
 					
-						<g:sortableColumn property="selectedItems" title="${message(code: 'basket.selectedItems.label', default: 'Selected Items')}" />
+						<g:sortableColumn property="basketInstance.book.title" title="Books selected" />
 					
-						<g:sortableColumn property="totalPrice" title="${message(code: 'basket.totalPrice.label', default: 'Total Price')}" />
+						<g:sortableColumn property="basketInstance.book.price" title="Price" />
 					
-						<th><g:message code="basket.user.label" default="User" /></th>
+						<th>User</th>
 					
 					</tr>
 				</thead>
@@ -36,7 +36,7 @@
 				<g:each in="${basketInstanceList}" status="i" var="basketInstance">
 					<tr class="${(i % 2) == 0 ? 'even' : 'odd'}">
 					
-						<td><g:link action="show" id="${basketInstance.id}">${fieldValue(bean: basketInstance, field: "selectedItems")}</g:link></td>
+						<td><g:link action="show" id="${basketInstance.id}">${fieldValue(bean: basketInstance.book, field: "title")}</g:link></td>
 					
 						<td>${fieldValue(bean: basketInstance, field: "totalPrice")}</td>
 					
@@ -48,6 +48,11 @@
 			</table>
 			<div class="pagination">
 				<g:paginate total="${basketInstanceTotal}" />
+			</div>
+			
+			<div>
+				<br>
+				<g:link controller="booksPurchased" action="purchaseBooks">Buy books in basket</g:link>
 			</div>
 		</div>
 	</body>
